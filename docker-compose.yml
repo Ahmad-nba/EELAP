@@ -1,0 +1,37 @@
+services:
+  redis:
+    image: "redis:7.0.11-alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+  django-web:
+    build:
+      context: .
+      dockerfile: eelap/Dockerfile
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+    env_file:
+    - .env
+    environment:
+      - SECRET_KEY=12234abcd5678efgh91011ijklmnop12
+      - DEBUG=1
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+    
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: eelap
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: gazal18100
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # optional, only if you want host access
+
+volumes:
+  postgres_data:
