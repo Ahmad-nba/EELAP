@@ -10,10 +10,10 @@ RUN pip install --upgrade pip
 COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r /usr/src/app/requirements.txt
 
-COPY docker/entrypoint.sh /usr/src/app/entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh \
-    && sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
+# Copy entrypoint to a NON-mounted path (safer)
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh && sed -i 's/\r$//g' /entrypoint.sh
 
 COPY . /usr/src/app/
 
-ENTRYPOINT ["/usr/src/app/docker/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
