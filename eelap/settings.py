@@ -6,7 +6,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / ".env")  # loads .env into os.environ-like access
+environ.Env.read_env(BASE_DIR / ".env.local")  # loads .env.local into os.environ-like access
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 

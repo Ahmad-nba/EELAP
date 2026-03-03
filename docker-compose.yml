@@ -4,7 +4,7 @@ services:
     image: postgres:16
     container_name: eelap-db
     env_file:
-      - .env
+      - .env.docker
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -26,7 +26,7 @@ services:
       dockerfile: eelap/Dockerfile
     container_name: eelap-web
     env_file:
-      - .env
+      - .env.docker
     depends_on:
       - db
       - redis
