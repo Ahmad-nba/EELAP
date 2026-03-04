@@ -263,7 +263,8 @@ class AccountClaim(models.Model):
         related_name="sent_claims",
     )
 
-    otp_hash = models.CharField(max_length=128)
+    #: otp_hash = models.CharField(max_length=128) token style
+    otp_hash = models.CharField(max_length=128, blank=True, null=True)  # temporary legacy field
     expires_at = models.DateTimeField()
     is_used = models.BooleanField(default=False)
 

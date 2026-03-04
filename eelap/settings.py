@@ -24,8 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "accounts",
     "attendance",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -110,3 +112,10 @@ DATABASES = {
 
 # Custom user model
 AUTH_USER_MODEL = "accounts.User"
+
+# emailing settings
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+ANYMAIL = {
+    "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY", ""),
+}
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "no-reply@eelap.app")
