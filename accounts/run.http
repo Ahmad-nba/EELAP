@@ -3,6 +3,15 @@ POST http://127.0.0.1:8000/api/accounts/auth/login/
 Content-Type: application/json
 
 {
-  "email": "ahmadshamurannba@gmail.com",
-  "password": "gazal18100"
+  "email": "mubiru.shamuranahamada@students.mak.ac.ug",
+  "password": "shamuran18100"
+}
+
+### send invite
+POST http://127.0.0.1:8000/api/accounts/lecturers/invite/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcyNzQxOTIwLCJpYXQiOjE3NzI2OTg3MjAsImp0aSI6ImEwNjJiNDRmOTJlMzQ5MTI4OTU4ZTAwNjE2YmNmYTM1IiwidXNlcl9pZCI6ImQ3NGVlNTIwLTg1OTMtNDk4YS1hYTU5LTE0MTJhZGEzNDRhOCIsInJvbGUiOiJTVVBFUkFETUlOIiwiZW1haWwiOiJtdWJpcnUuc2hhbXVyYW5haGFtYWRhQHN0dWRlbnRzLm1hay5hYy51ZyJ9.4uYtW95yzXzvc5XiarThnEO0CwMyJi6wtu4727JlPOo
+
+{
+  "email": "kiwalabyeo@gmail.com"
 }

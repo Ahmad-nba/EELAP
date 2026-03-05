@@ -24,8 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # third-party
     "rest_framework",
-    "django_filters",gcc
+    "django_filters",
+    # local apps
     "accounts",
     "attendance",
     "anymail",
@@ -114,13 +116,15 @@ DATABASES = {
 # Custom user model
 AUTH_USER_MODEL = "accounts.User"
 
-# emailing settings
-EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
-ANYMAIL = {
-    "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY", ""),
-}
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "no-reply@eelap.app")
+# --- EMAIL CONFIG ------------------------------------------------------------
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "apikey"  # This literally stays "apikey"
+EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
+DEFAULT_FROM_EMAIL = ("ahmadshamurannba@gmail.com", "no-reply@eelap.app")
 # seeting jwt auth for DRF if you want to use it for API auth (optional)
 # REST_FRAMEWORK = {
 #     "DEFAULT_AUTHENTICATION_CLASSES": (
