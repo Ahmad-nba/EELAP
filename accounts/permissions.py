@@ -1,4 +1,3 @@
-# accounts/permissions.py
 from rest_framework.permissions import BasePermission
 
 from accounts.models import UserRole
@@ -10,5 +9,5 @@ class IsSuperAdmin(BasePermission):
         return bool(
             user
             and user.is_authenticated
-            and (getattr(user, "role", None) == UserRole.SUPERADMIN )
+            and (getattr(user, "role", None) == UserRole.SUPERADMIN)
         )

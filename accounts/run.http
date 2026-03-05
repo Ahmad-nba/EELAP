@@ -1,0 +1,8 @@
+### Login (JWT)
+POST http://127.0.0.1:8000/api/accounts/auth/login/
+Content-Type: application/json
+
+{
+  "email": "ahmadshamurannba@gmail.com",
+  "password": "gazal18100"
+}

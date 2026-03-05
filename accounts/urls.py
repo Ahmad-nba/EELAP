@@ -5,6 +5,8 @@ from accounts.views import (
     StudentClaimStartView,
     ClaimCompleteView,
     LecturerInviteView,
+    EmailTokenObtainPairView,
+    TokenRefreshView,
 )
 
 urlpatterns = [
@@ -16,4 +18,7 @@ urlpatterns = [
 
     # Superadmin lecturer invite
     path("lecturers/invite/", LecturerInviteView.as_view(), name="lecturer-invite"),
+    # auth endpoints (if using JWT)
+    path("auth/login/", EmailTokenObtainPairView.as_view(), name="jwt-login"),
+    path("auth/refresh/", TokenRefreshView.as_view(), name="jwt-refresh"),
 ]

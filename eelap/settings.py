@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_filters",gcc
     "accounts",
     "attendance",
     "anymail",
@@ -119,3 +120,49 @@ ANYMAIL = {
     "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY", ""),
 }
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "no-reply@eelap.app")
+
+# seeting jwt auth for DRF if you want to use it for API auth (optional)
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": (
+#         "rest_framework_simplejwt.authentication.JWTAuthentication",
+#     ),
+#     "DEFAULT_PERMISSION_CLASSES": (
+#         "rest_framework.permissions.IsAuthenticated",
+#     ),
+# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+}
+
+# --- SIMPLE JWT CONFIGURATION ------------------------------------------------
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # ⏰ Extend access token lifetime (default is 5 minutes)
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
+    # ♻️ Extend refresh token lifetime
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    # 🔄 Token rotation and blacklisting
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+    # ⚙️ Header settings
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    # Optional but good to keep these defaults explicit
+    "UPDATE_LAST_LOGIN": False,
+}
+
+# --- PASSWORD VALIDATORS ----------------------------------------------------
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
