@@ -10,7 +10,7 @@ Content-Type: application/json
 ### send invite
 POST http://127.0.0.1:8000/api/accounts/lecturers/invite/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzczMDIwNzUzLCJpYXQiOjE3NzI5Nzc1NTMsImp0aSI6ImFmZWRlY2RlNzY2YjRiODU4NjQ5ZDIxMjUyNjIyNDU5IiwidXNlcl9pZCI6ImQ3NGVlNTIwLTg1OTMtNDk4YS1hYTU5LTE0MTJhZGEzNDRhOCIsInJvbGUiOiJTVVBFUkFETUlOIiwiZW1haWwiOiJtdWJpcnUuc2hhbXVyYW5haGFtYWRhQHN0dWRlbnRzLm1hay5hYy51ZyJ9.6R4ed_z5avOkpa1C9HhYO0w02LqEYUS4ovcGeDAOT0Y
+Authorization: Bearer 
 
 {
   "email": "kiwalabyeo@gmail.com"
