@@ -1,4 +1,3 @@
-# accounts/views.py
 from __future__ import annotations
 
 from django.core import signing
@@ -126,8 +125,10 @@ class LecturerInviteView(APIView):
             status=status.HTTP_201_CREATED,
         )
 
+
 class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = EmailTokenObtainPairSerializer
+
 
 # login view using email + password, returns JWT access + refresh tokens
 class LoginView(APIView):
@@ -137,14 +138,17 @@ class LoginView(APIView):
             context={"request": request},
         )
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data["user"] #
+        user = serializer.validated_data["user"]  #
         refresh = RefreshToken.for_user(user)
-        return Response({
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-            "user": {
-                "email": user.email,
-                "username": user.username,
-                "role": user.role
-            }
-        }, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+                "user": {
+                    "email": user.email,
+                    "username": user.username,
+                    "role": user.role,
+                },
+            },
+            status=status.HTTP_200_OK,
+        )

@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     # local apps
     "accounts",
     "attendance",
-    "anymail",
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -118,22 +119,31 @@ AUTH_USER_MODEL = "accounts.User"
 
 # --- EMAIL CONFIG ------------------------------------------------------------
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "apikey"  # This literally stays "apikey"
-EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
-DEFAULT_FROM_EMAIL = ("ahmadshamurannba@gmail.com", "no-reply@eelap.app")
-# seeting jwt auth for DRF if you want to use it for API auth (optional)
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": (
-#         "rest_framework_simplejwt.authentication.JWTAuthentication",
-#     ),
-#     "DEFAULT_PERMISSION_CLASSES": (
-#         "rest_framework.permissions.IsAuthenticated",
-#     ),
-# }
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.sendgrid.net"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "apikey"  # This literally stays "apikey"
+# EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
+# DEFAULT_FROM_EMAIL = ("ahmadshamurannba@gmail.com", "no-reply@eelap.app")
+
+# For development, you can use console backend to print emails to the console instead of sending.
+# emailing settings
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "no-reply@eelap.local"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.sendgrid.net"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+    EMAIL_HOST_USER = "apikey"
+    EMAIL_HOST_PASSWORD = env("SENDGRID_API_KEY")
+    DEFAULT_FROM_EMAIL = env("ahmadshamurannba@gmail.com")
+    EMAIL_TIMEOUT = 20
+
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
